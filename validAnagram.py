@@ -5,14 +5,18 @@ class Solution:
         if len(s) != len(t):
             return False
         #return sorted(s)==sorted(t)
-        count = [0] * 26  # Assume only lowercase English letters
-    
-        for i in range(len(s)):
-            count[ord(s[i]) - ord('a')] += 1
-            count[ord(t[i]) - ord('a')] -= 1
-        
-        for c in count:
-            if c != 0:
+        d={}
+        for i in s:
+            if i not in d:
+                d[i]=1
+            else:
+                d[i]+=1
+        for i in t:
+            if i in d:
+                d[i]-=1
+            else:
                 return False
-        
-        return True
+        for i in d:
+            if d[i]!=0:
+                return False
+            return True
